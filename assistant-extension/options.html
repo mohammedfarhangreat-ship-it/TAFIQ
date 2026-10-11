@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tafiq Settings</title>
+  <link rel="icon" href="icons/icon32.png">
+  <link rel="stylesheet" href="ui.css">
+  <style>
+    main { max-width: 640px; margin: 0 auto; padding: 32px 16px 64px; }
+    h1 { font-size: 24px; margin: 0 0 4px; }
+    .sub { color: var(--muted); margin: 0 0 24px; }
+    section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    h2 { font-size: 16px; margin: 0 0 12px; }
+    label { display: block; font-weight: 600; margin: 12px 0 4px; }
+    label.check { display: flex; gap: 8px; align-items: center; font-weight: 400; }
+    .help { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+    input[type=text], input[type=password], select, textarea {
+      width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; background: var(--bg);
+    }
+    textarea { min-height: 100px; font-family: ui-monospace, monospace; font-size: 13px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 4px 0; }
+    .row { display: flex; gap: 8px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
+    #saved { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Tafiq Settings</h1>
+  <p class="sub">Your personal voice assistant for ChromeOS.</p>
+
+  <section>
+    <h2>AI</h2>
+    <label for="apiKey">Claude API key</label>
+    <input type="password" id="apiKey" placeholder="sk-ant-…" autocomplete="off">
+    <p class="help">Get one at console.anthropic.com → API Keys. It is stored only on this device, inside this extension. Opening apps by name works without a key.</p>
+    <label for="model">Model</label>
+    <input type="text" id="model">
+    <p class="help">Default: claude-opus-5-5.</p>
+    <label for="effort">Thinking effort</label>
+    <select id="effort">
+      <option value="low">Low — fastest replies (best for voice)</option>
+      <option value="medium">Medium</option>
+      <option value="high">High — slower, more careful</option>
+    </select>
+    <label class="check"><input type="checkbox" id="webSearch"> Allow web search for live info (weather, news, scores)</label>
+  </section>
+
+  <section>
+    <h2>You</h2>
+    <label for="userName">Your name</label>
+    <input type="text" id="userName" placeholder="e.g. Farhan">
+    <label>Things Tafiq remembers about you</label>
+    <ul id="memories"></ul>
+    <p class="help">Say “remember that…” to add, or “forget…” to remove.</p>
+  </section>
+
+  <section>
+    <h2>Voice</h2>
+    <label for="wakeWords">Wake words (comma separated)</label>
+    <input type="text" id="wakeWords">
+    <p class="help">Speech recognition may hear “Tafiq” differently — add the spellings it shows under “heard” on the listening tab.</p>
+    <label for="language">Language</label>
+    <select id="language">
+      <option value="en-US">English (US)</option>
+      <option value="en-GB">English (UK)</option>
+      <option value="en-IN">English (India)</option>
+      <option value="hi-IN">Hindi</option>
+      <option value="ur-PK">Urdu</option>
+      <option value="ar-SA">Arabic</option>
+      <option value="bn-IN">Bengali</option>
+      <option value="ta-IN">Tamil</option>
+      <option value="te-IN">Telugu</option>
+      <option value="ml-IN">Malayalam</option>
+      <option value="fr-FR">French</option>
+      <option value="es-ES">Spanish</option>
+      <option value="de-DE">German</option>
+    </select>
+    <label class="check"><input type="checkbox" id="alwaysOn"> Always on: keep the listening tab open (re-opens it if closed)</label>
+  </section>
+
+  <section>
+    <h2>Apps</h2>
+    <label class="check"><input type="checkbox" id="appsInWindow"> Open web apps in their own window</label>
+    <label for="customApps">Your own apps (one per line: Name = URL)</label>
+    <textarea id="customApps" placeholder="School portal = https://portal.example.edu&#10;Bank = https://mybank.example.com"></textarea>
+    <p class="help">Installed Chrome apps and common apps (Gmail, YouTube, Drive, Files, Settings, WhatsApp…) already work.</p>
+  </section>
+
+  <div class="row">
+    <button class="primary" id="save">Save</button>
+    <button id="openListener">Open listening tab</button>
+    <span id="saved"></span>
+  </div>
+</main>
+<script type="module" src="options.js"></script>
+</body>
+</html>

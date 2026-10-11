@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tafiq · Listening</title>
+  <link rel="icon" href="icons/icon32.png">
+  <link rel="stylesheet" href="ui.css">
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; }
+    .orb {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #a5a0ff, var(--accent));
+      box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+      transition: transform 0.3s, opacity 0.3s;
+      opacity: 0.55;
+    }
+    [data-state="awake"] .orb { opacity: 1; animation: pulse 1.2s infinite; }
+    [data-state="thinking"] .orb { opacity: 1; animation: spin 1s linear infinite; background: conic-gradient(var(--accent), #a5a0ff, var(--accent)); }
+    [data-state="speaking"] .orb { opacity: 1; animation: talk 0.5s ease-in-out infinite alternate; }
+    [data-state="paused"] .orb, [data-state="error"] .orb { opacity: 0.2; filter: grayscale(1); }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(79,70,229,0.5); } 100% { box-shadow: 0 0 0 30px rgba(79,70,229,0); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes talk { from { transform: scale(0.95); } to { transform: scale(1.06); } }
+    h1 { font-size: 22px; margin: 24px 0 4px; }
+    #status { color: var(--muted); margin: 0 0 8px; text-align: center; }
+    #heard { min-height: 1.5em; font-style: italic; color: var(--muted); text-align: center; }
+    #error { color: var(--error); max-width: 520px; text-align: center; }
+    .controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 16px 0; }
+    .log { width: 100%; max-width: 640px; margin-top: 8px; }
+    .hint { color: var(--muted); font-size: 13px; text-align: center; max-width: 520px; margin-top: 24px; }
+  </style>
+</head>
+<body data-state="starting">
+  <div class="orb" aria-hidden="true"></div>
+  <h1>Tafiq</h1>
+  <p id="status">Starting…</p>
+  <div id="heard"></div>
+  <div id="error"></div>
+  <div class="controls">
+    <button id="talk" class="primary">Talk now</button>
+    <button id="stop">Stop speaking</button>
+    <button id="pause">Pause listening</button>
+    <button id="settings">Settings</button>
+  </div>
+  <div id="log" class="log"></div>
+  <p class="hint">Keep this pinned tab open — it's what lets Tafiq hear you. Say your wake word, e.g. “Hey Tafiq, open YouTube”, or press Alt+Shift+T.</p>
+  <script type="module" src="listener.js"></script>
+</body>
+</html>

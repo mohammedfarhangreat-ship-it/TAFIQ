@@ -71,6 +71,12 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
 
 Never commit `.env.local`, passwords, API secrets, or service-role keys to GitHub.
 
+## Tafiq Voice Assistant (ChromeOS)
+
+This repository also contains **Tafiq Voice Assistant**, an always-on personal voice assistant for
+ChromeOS that opens apps, manages tabs, sets reminders and answers questions. See
+[`assistant-extension/README.md`](assistant-extension/README.md) for install steps.
+
 ## Project Vision
 
 TAFIQ aims to simplify quotation management, reduce repetitive administrative work, improve accuracy, and help businesses streamline their sales operations.
